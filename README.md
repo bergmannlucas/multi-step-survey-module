@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Multi Step Survey Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
+
+Clone the project and install dependencies. This project uses node version `v16.15.0`.
+
+````
+  $ git clone git@github.com:bergmannlucas/multi-step-survey-module.git
+  $ cd multi-step-survey-module
+  $ npm ci
+````
 
 ## Available Scripts
 
@@ -11,36 +19,50 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## About the project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The purpose of this challenge is to create a multi-step survey module that can be integrated into any website. This survey contains four steps, and there are some rules that must be respected in order to have a good user experience. The rules are:
+- The survey should load in a pop-up, 2 seconds after the page has loaded.
+- The survey should contain 4 steps and have 'Next' and 'Previous' buttons on the steps which
+need them.
+- The survey should have a 'Submit' button on the last step, which on click should set the survey
+as submitted and close the popup.
+- The survey steps should contain the following steps (note that some fields are required):
 
-### `npm run eject`
+| Step    | Description      | Fields                                                         | required |
+|---------|------------------|----------------------------------------------------------------|----------|
+| 1       | Identity         | Name (input), Email (input)                                    |    no    |
+| 2       | Details          | Age (select), Gender (radio input)                             |    yes   |
+| 3       | Favorites        | Favorite Book (input), Favorite Colors (multi-input checkbox)  |    yes   |
+| 4       | Summary          | Table with all of the data collected in the survey             |    yes   |
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Also, some other bonus rules:
+- If the browser tab was closed before the survey was submitted and subsequently re-opened,
+the script should re-open the survey and continue from where the user left of.
+- The survey should not re-open if it was already submitted.
+- The survey should work by including a single JS file in any HTML.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Solution
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Due to the size of the project being considerably small, I didn't use any libraries to manage the application's state. To persist the changes made in the survey, I used the browser's local storage.
+There are 3 keys created in localStorage:
+- SURVEY-MODULE_survey: responsible for storing the survey data
+- SURVEY-MODULE_lastStep: responsible for saving the last step accessed by the user, so that if the page is accessed again, it will open in this step.
+- SURVEY-MODULE_submitted: responsible for controlling whether the survey has already been submitted or not.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To restart the survey if it has been answered, just change the submitted key to false and it will render again.
 
-## Learn More
+## Improvements for the future
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Create a responsive interface
+- Use redux to manage state and make the application scalable
+- Apply accessibility improvements
