@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextField /> should render with placeholder 1`] = `
+.c0 {
+  width: 100%;
+  background: transparent;
+  border: 0px solid;
+  color: #9249FF;
+  border-bottom: 4px solid #9249FF;
+  font-size: 2.0rem;
+  margin-bottom: 2.4rem;
+}
+
+<input
+  class="c0"
+  placeholder="E-mail"
+  type="text"
+/>
+`;
